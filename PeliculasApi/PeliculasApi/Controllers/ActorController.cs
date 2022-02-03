@@ -32,6 +32,7 @@ namespace PeliculasApi.Controllers
 
         }
 
+
         [HttpPost]
         public async Task<ActionResult> Post([FromForm] ActorCreacionDTO actorCreacionDTO)
         {
