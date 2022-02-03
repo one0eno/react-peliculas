@@ -10,7 +10,7 @@ import { coordenadasDTO } from '../utils/coordenadasDTO';
 
 interface formularioCinesProps {
   modelo: cineCreacionDTO;
-  onsubmit(valores: cineCreacionDTO, acciones: FormikHelpers<cineCreacionDTO>): void;
+  onSubmit(valores: cineCreacionDTO, acciones: FormikHelpers<cineCreacionDTO>): void;
 }
 
 export default function FormularioCines(props: formularioCinesProps) {
@@ -29,7 +29,7 @@ export default function FormularioCines(props: formularioCinesProps) {
   return (
     <Formik
       initialValues={props.modelo}
-      onSubmit={props.onsubmit}
+      onSubmit={props.onSubmit}
       validationSchema={Yup.object({
         nombre: Yup.string().required('Nombre es obligatorio').primeraLetraMayuscula(),
       })}

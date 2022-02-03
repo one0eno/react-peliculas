@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 using PeliculasApi.ApiBehavior;
 using PeliculasApi.Filtros;
 using PeliculasApi.Utilidades;
@@ -35,15 +38,29 @@ namespace PeliculasApi
         {
 
             services.AddAutoMapper(typeof(Startup));
+
+            //Para geomitria y los mapas y autommaper
+            services.AddSingleton(provider =>
+                new MapperConfiguration(config =>
+                {
+                    var geomitriFactory = provider.GetRequiredService<GeometryFactory>();
+                    config.AddProfile(new AutomapperProfiles(geomitriFactory));
+                }).CreateMapper());
+
+            //Para geomitria y los mapas
+            services.AddSingleton<GeometryFactory>(NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326));
+
             services.AddTransient<IAlmacenadorArchivos, AlmacenadorAzureStorage>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
             // services.AddResponseCaching();
 
-            services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(
+            services.AddDbContext<ApplicationDBContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("defaultConnection"),
+                sqlServer => sqlServer.UseNetTopologySuite())
 
-                Configuration.GetConnectionString("defaultConnection")
+                );
 
-                ));
+           
 
             //services.AddCors(options =>
             //{

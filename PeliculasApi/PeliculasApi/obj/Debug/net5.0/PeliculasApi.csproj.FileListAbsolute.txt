@@ -65,3 +65,7 @@ C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Azure.Storage.
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Azure.Storage.Common.dll
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\System.Memory.Data.dll
+C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite.dll
+C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\NetTopologySuite.dll
+C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\NetTopologySuite.IO.SqlServerBytes.dll
+C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\obj\Debug\net5.0\EFCoreSqlServerNetTopologySuite.cs
