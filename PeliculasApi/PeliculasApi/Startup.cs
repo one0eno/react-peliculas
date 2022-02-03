@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PeliculasApi.ApiBehavior;
 using PeliculasApi.Filtros;
-
+using PeliculasApi.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +35,7 @@ namespace PeliculasApi
         {
 
             services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<IAlmacenadorArchivos, AlmacenadorAzureStorage>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
             // services.AddResponseCaching();
 
@@ -95,7 +96,8 @@ namespace PeliculasApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PeliculasApi v1"));
             }
 
-           
+
+            //app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
 

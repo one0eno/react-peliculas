@@ -120,7 +120,7 @@ namespace PeliculasApi.Controllers
 
             var genero = await context.Generos.AnyAsync(o => o.Id == id);
 
-            if (genero == null)
+            if (!genero)
             {
                 return NotFound();
             }

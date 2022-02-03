@@ -9,7 +9,7 @@ interface formGroupMarkDownProps {
 
 export default function FormGroupMarkDown(props: formGroupMarkDownProps) {
   const { values } = useFormikContext<any>();
-  console.log(props.campo);
+  //console.log(props.campo);
   return (
     <>
       <div className='form-group form-makdown'>
