@@ -20,11 +20,11 @@ const rutas = [
   { path: '/generos', componente: IndiceGeneros, exact: true },
 
   { path: '/actores/crear', componente: Crearactores },
-  { path: '/actores/editar/:id(\\d+)', componente: Editaractores },
+  { path: '/actores/:id(\\d+)', componente: Editaractores },
   { path: '/actores', componente: Indiceactores, exact: true },
 
   { path: '/cines/crear', componente: Crearcines },
-  { path: '/cines/editar/:id(\\d+)', componente: Editarcines },
+  { path: '/cines/:id(\\d+)', componente: Editarcines },
   { path: '/cines', componente: Indicecines, exact: true },
 
   { path: '/peliculas/crear', componente: CrearPeliculas },

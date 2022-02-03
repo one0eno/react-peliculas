@@ -33,7 +33,7 @@ export const Crearactores = () => {
       <MostrarErrores errores={errores} />
       <FormularioActores
         modelo={{ nombre: '', fechaNacimiento: new Date() }}
-        onsubmit={async (valores) => await crear(valores)}
+        onSubmit={async (valores) => await crear(valores)}
       />
     </>
   );

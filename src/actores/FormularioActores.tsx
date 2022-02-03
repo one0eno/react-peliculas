@@ -11,13 +11,13 @@ import FormGroupMarkDown from '../utils/FormGroupMarkdown';
 
 interface formularioDeActores {
   modelo: actorCreacionDTO;
-  onsubmit(valores: actorCreacionDTO, acciones: FormikHelpers<actorCreacionDTO>): void;
+  onSubmit(valores: actorCreacionDTO, acciones: FormikHelpers<actorCreacionDTO>): void;
 }
 export default function FormularioActores(props: formularioDeActores) {
   return (
     <Formik
       initialValues={props.modelo}
-      onSubmit={props.onsubmit}
+      onSubmit={props.onSubmit}
       validationSchema={Yup.object({
         nombre: Yup.string().required('El nombre es requerido').primeraLetraMayuscula(),
         fechaNacimiento: Yup.date().nullable().required('Campo requerido'),
@@ -26,7 +26,7 @@ export default function FormularioActores(props: formularioDeActores) {
       {(formikProps) => (
         <Form>
           <FormGroupText campo='nombre' label='Nombre' />
-          <FormGroupFecha campo='fechaNacimiento' label='Fecha Nacimiento'></FormGroupFecha>
+          <FormGroupFecha campo='fechaNacimiento' label='Fecha Nacimiento' />
           <FormGroupImagen campo='foto' label='Foto' imagenURL={props.modelo.fotoURL} />
           <FormGroupMarkDown campo='biografia' label='Biografia' />
           <Button disable={formikProps.isSubmitting} type='submit'>

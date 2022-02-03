@@ -1,19 +1,38 @@
 import React from 'react';
+import EditarEntidad from '../utils/EditarEntidad';
 import FormularioActores from './FormularioActores';
+import { actorCreacionDTO, actorDTO } from './actores.model';
+import { urlActores } from '../utils/endpoints';
+import { convertirActorAFormData } from '../FormDataUtils';
 
 export const Editaractores = () => {
+  const transformar = (actor: actorDTO) => {
+    return {
+      nombre: actor.nombre,
+      fotoURL: actor.foto,
+      fechaNacimiento: new Date(actor.fechaNacimiento),
+      biografia: actor.biografia,
+    };
+  };
+
   return (
     <>
-      <div>Editar actores</div>
-      <FormularioActores
-        modelo={{
-          nombre: 'Tom holland',
-          fechaNacimiento: new Date('1996-06-01T:00:00:00'),
-          fotoURL:
-            'https://m.media-amazon.com/images/M/MV5BMTg3MDc0MjY0OV5BMl5BanBnXkFtZTcwNzU1MDAxOA@@._V1_UY317_CR10,0,214,317_AL_.jpg',
-        }}
-        onsubmit={(valores) => console.log(valores)}
-      />
+      <EditarEntidad<actorCreacionDTO, actorDTO>
+        urlBase={urlActores}
+        urlIndice='/actores'
+        nombreEntidad='Actores'
+        transformarFormData={convertirActorAFormData}
+        transformar={transformar}
+      >
+        {(entidad, editar) => (
+          <FormularioActores
+            modelo={entidad}
+            onSubmit={async (valores) => {
+              await editar(valores);
+            }}
+          />
+        )}
+      </EditarEntidad>
     </>
   );
 };

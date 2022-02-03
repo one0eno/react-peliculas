@@ -48,15 +48,21 @@ namespace PeliculasApi.Controllers
 
         }
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] ActorCreacionDTO actorCreacionDTO)
+        public async Task<ActionResult> Put(int id, [FromForm] ActorCreacionDTO actorCreacionDTO)
         {
             var actor = await context.Actores.FirstOrDefaultAsync(o => o.Id == id);
             if (actor == null)
             {
                 return NotFound();
             }
+            
+
 
             actor = mapper.Map(actorCreacionDTO,actor);
+            if (actorCreacionDTO.Foto != null)
+            {
+                actor.Foto = await almacenadorArchivos.EditarArchivo(actor.Foto, contenedorArchivos, actorCreacionDTO.Foto );
+            }
             await context.SaveChangesAsync();
 
             return NoContent();
@@ -86,7 +92,7 @@ namespace PeliculasApi.Controllers
 
             var queryable = context.Actores.AsQueryable();
             await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
-            var actores = queryable.OrderBy(x => x.Nombre).Paginar(paginacionDTO).ToListAsync();
+            var actores = await queryable.OrderBy(x => x.Nombre).Paginar(paginacionDTO).ToListAsync();
             return mapper.Map<List<ActorDTO>>(actores);
       
         }

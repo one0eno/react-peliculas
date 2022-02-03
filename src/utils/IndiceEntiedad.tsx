@@ -17,6 +17,7 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
   }, [pagina, recordsPorPagina]);
 
   const cargarDatos = () => {
+    //alert(props.urlBase);
     axios
       .get(props.urlBase, {
         params: {

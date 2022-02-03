@@ -21,7 +21,19 @@ export default function EditarEntidad<TCreacion, TLectura>(props: EditarEntidadP
 
   const editar = async (entidadEditar: TCreacion) => {
     try {
-      await axios.put(`${props.urlBase}/${id}`, entidadEditar);
+      if (props.transformarFormData) {
+        const formData = props.transformarFormData(entidadEditar);
+
+        await axios({
+          method: 'put',
+          url: `${props.urlBase}/${id}`,
+          data: formData,
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+      } else {
+        await axios.put(`${props.urlBase}/${id}`, entidadEditar);
+      }
+
       history.push(props.urlIndice);
     } catch (error) {
       setErrores(error.response.data);
@@ -43,6 +55,7 @@ interface EditarEntidadProps<TCreacion, TLectura> {
   nombreEntidad: string;
   children(entidad: TCreacion, editar: (entidad: TCreacion) => void): ReactElement;
   transformar(entidad: TLectura): TCreacion;
+  transformarFormData?(modelo: TCreacion): FormData;
 }
 
 EditarEntidad.defaultProps = {
