@@ -35,7 +35,13 @@ namespace PeliculasApi
         {
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddTransient<IAlmacenadorArchivos, AlmacenadorAzureStorage>();
+            //services.AddTransient<IAlmacenadorArchivos, AlmacenadorAzureStorage>();
+            
+            //Para guardar archivos en local
+            services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
+            services.AddHttpContextAccessor();
+            
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
             // services.AddResponseCaching();
 
@@ -101,10 +107,14 @@ namespace PeliculasApi
 
             app.UseHttpsRedirection();
 
+            //Me permite usar archivos estaticos
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseCors(MyAllowSpecificOrigins);
 
+            
             //app.UseResponseCaching();
 
             app.UseAuthentication();
