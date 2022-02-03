@@ -21,5 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/PeliculasApi/PeliculasApi/appsettings*
+/PeliculasApi/PeliculasApi/appsettings.json
+/PeliculasApi/PeliculasApi/appsettings.Development.json
 
