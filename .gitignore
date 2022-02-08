@@ -23,4 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 /PeliculasApi/PeliculasApi/appsettings.json
 /PeliculasApi/PeliculasApi/appsettings.Development.json
+/PeliculasApi/.vs/PeliculasApi/v16/.suo
+/PeliculasApi/PeliculasApi/obj/Debug/net5.0/PeliculasApi.csproj.AssemblyReference.cache
 
+*.dll
+*.pbd
