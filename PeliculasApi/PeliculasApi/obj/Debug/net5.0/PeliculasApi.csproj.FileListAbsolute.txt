@@ -11,7 +11,6 @@ C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Microsoft.Open
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\obj\Debug\net5.0\PeliculasApi.csproj.AssemblyReference.cache
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\obj\Debug\net5.0\PeliculasApi.GeneratedMSBuildEditorConfig.editorconfig
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\obj\Debug\net5.0\PeliculasApi.AssemblyInfoInputs.cache
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\obj\Debug\net5.0\PeliculasApi.AssemblyInfo.cs
