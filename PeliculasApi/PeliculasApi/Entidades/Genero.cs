@@ -16,6 +16,7 @@ namespace PeliculasApi.Entidades
         [StringLength(maximumLength:50)]
         public string  Nombre { get; set; }
 
+        public List<PeliculasGeneros> PeliculasGeneros { get; set; }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
 

@@ -30,6 +30,11 @@ export default function Menu() {
                 Actores
               </NavLink>
             </li>
+            <li className='nav-item'>
+              <NavLink className='nav-link' activeClassName='claseActiva' to='/peliculas/crear'>
+                Crear Pelicula
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

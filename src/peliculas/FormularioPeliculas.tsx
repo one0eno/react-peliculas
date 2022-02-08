@@ -16,9 +16,12 @@ import TypeAheadActores from '../actores/TypeAheadActores';
 import { actorPeliculaDTO } from '../actores/actores.model';
 
 const mapear = (arreglo: { id: number; nombre: string }[]): selectorMultipleModel[] => {
-  return arreglo.map((valor) => {
-    return { llave: valor.id, valor: valor.nombre };
-  });
+  if (arreglo) {
+    return arreglo.map((valor) => {
+      return { llave: valor.id, valor: valor.nombre };
+    });
+  }
+  return [];
 };
 
 export default function FormularioPeliculas(props: formularioPeliculasProps) {
@@ -29,11 +32,13 @@ export default function FormularioPeliculas(props: formularioPeliculasProps) {
   const [cinesNoSeleccionados, setCinesNoSeleccionados] = useState(mapear(props.cinesNoSeleccionados));
 
   const [actoresSeleccionados, setActoresSelecionados] = useState<actorPeliculaDTO[]>(props.actoresSeleccionaos);
+
   return (
     <>
       <Formik
         initialValues={props.modelo}
         onSubmit={(valores, acciones) => {
+          console.log(valores);
           valores.generosIds = generosSeleccionados.map((valor) => valor.llave);
           valores.cinesId = cinesSeleccionados.map((valor) => valor.llave);
           valores.actores = actoresSeleccionados;
@@ -46,10 +51,11 @@ export default function FormularioPeliculas(props: formularioPeliculasProps) {
         {(formikProps) => (
           <Form>
             <FormGroupText label='Titulo' campo='titulo' />
+            <FormGroupText label='Resumen' campo='resumen' />
             <FormGroupCheckBox label='En cines' campo='enCines' />
             <FormGroupText label='Trailer' campo='trailer' />
             <FormGroupFecha label='Fecha lanzamiento' campo='fechaLanzamiento' />
-            <FormGroupImagen campo='Poster' label='Poster' imagenUrl={props.modelo.posterURL} />
+            <FormGroupImagen campo='poster' label='Poster' imagenURL={props.modelo.posterURL} />
             <div className='form-group'>
               <label>Géneros</label>
               <SelectorMultiple
@@ -105,7 +111,7 @@ export default function FormularioPeliculas(props: formularioPeliculasProps) {
               Guardar
             </Button>
             <Link to='/' className='btn btn-secondarey'>
-              Cancelare
+              Cancelar
             </Link>
           </Form>
         )}

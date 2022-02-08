@@ -1,4 +1,5 @@
 import { actorCreacionDTO } from './actores/actores.model';
+import { peliculasCreacionDTO } from './peliculas/peliculas.model';
 
 export function convertirActorAFormData(actor: actorCreacionDTO): FormData {
   const formData = new FormData();
@@ -19,6 +20,31 @@ export function convertirActorAFormData(actor: actorCreacionDTO): FormData {
   return formData;
 }
 
+export function convertirPeliculaAFormData(pelicula: peliculasCreacionDTO): FormData {
+  const formData = new FormData();
+  console.log(pelicula);
+  formData.append('titulo', pelicula.titulo);
+  formData.append('resumen', pelicula.resumen);
+  formData.append('enCines', String(pelicula.enCines));
+  formData.append('trailer', pelicula.trailer);
+  if (pelicula.poster) {
+    formData.append('poster', pelicula.poster);
+  }
+  if (pelicula.fechaLanzamiento) {
+    formData.append('fechaLanzamiento', formatearFecha(pelicula.fechaLanzamiento));
+  }
+
+  if (pelicula.trailer) {
+    formData.append('trailer', pelicula.trailer);
+  }
+
+  formData.append('generosIds', JSON.stringify(pelicula.generosIds));
+  formData.append('cinesIds', JSON.stringify(pelicula.cinesId));
+  formData.append('actores', JSON.stringify(pelicula.actores));
+  console.log('en convertir', formData);
+  return formData;
+}
+
 function formatearFecha(date: Date) {
   date = new Date(date);
   const formato = new Intl.DateTimeFormat('en', {
@@ -28,5 +54,6 @@ function formatearFecha(date: Date) {
   });
 
   const [{ value: month }, , { value: day }, , { value: year }] = formato.formatToParts(date);
+
   return `${year}-${month}-${day}`;
 }

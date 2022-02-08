@@ -15,10 +15,11 @@ export default function FormGroupFecha(props: formGroupFechaProps) {
         className='form-control'
         id={props.campo}
         name={props.campo}
-        defaultValue={values[props.campo]?.toLocaleDateString('es-ES')!}
+        defaultValue={new Date(values[props.campo])?.toLocaleDateString('en-CA')!}
         onChange={(e) => {
           const fecha = new Date(e.currentTarget.value + 'T00:00:00');
           values[props.campo] = fecha;
+
           validateForm();
         }}
       />

@@ -14,7 +14,8 @@ export default function EditarEntidad<TCreacion, TLectura>(props: EditarEntidadP
 
   useEffect(() => {
     axios.get(`${props.urlBase}/${id}`).then((respuesta: AxiosResponse<TLectura>) => {
-      // alert(JSON.stringify(respuesta.data));
+      //alert(JSON.stringify(props.transformar(respuesta.data)));
+
       setEntidad(props.transformar(respuesta.data));
     });
   }, []);

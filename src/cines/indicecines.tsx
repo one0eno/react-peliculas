@@ -20,7 +20,7 @@ export default function Indicecines() {
             {cines?.map((cine) => {
               return (
                 <tr key={cine.id}>
-                  <td>{botones(`/actores/${cine.id}`, cine.id)}</td>
+                  <td>{botones(`/cines/${cine.id}`, cine.id)}</td>
                   <td>{cine.nombre}</td>
                   <td>{cine.latitud}</td>
                   <td>{cine.longitud}</td>

@@ -69,3 +69,4 @@ C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Microsoft.Enti
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\NetTopologySuite.dll
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\NetTopologySuite.IO.SqlServerBytes.dll
 C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\obj\Debug\net5.0\EFCoreSqlServerNetTopologySuite.cs
+C:\Dev\react-peliculas\PeliculasApi\PeliculasApi\bin\Debug\net5.0\Newtonsoft.Json.dll

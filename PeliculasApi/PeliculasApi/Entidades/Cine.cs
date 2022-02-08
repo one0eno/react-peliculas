@@ -19,6 +19,9 @@ namespace PeliculasApi.Entidades
         /// </summary>
         public Point Ubicacion { get; set;}
 
+        public List<PeliculasCines> PeliculasCines { get; set; }
+
+        
 
 
 

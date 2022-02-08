@@ -1,9 +1,28 @@
-import React from 'react';
-import { pelicula } from './peliculas.model';
+import React, { useContext } from 'react';
+import { peliculaDTO } from './peliculas.model';
 import css from './peliculaindividual.module.css';
+import { Link, useHistory } from 'react-router-dom';
+import Button from '../utils/Button';
+import axios, { AxiosResponse } from 'axios';
+import { urlPeliculas } from '../utils/endpoints';
+import confirmar from '../utils/Confirmar';
+import AlertaContext from '../utils/AlertaContext';
 
 export default function PeliculaIndividual(props: peliculaIndividualProps) {
+  const history = useHistory();
   const construirLink = () => `/peliculas/${props.pelicula.id}`;
+  const alerta = useContext(AlertaContext);
+
+  const borrar = async () => {
+    try {
+      await axios.delete(`${urlPeliculas}/${props.pelicula.id}`).then((response: AxiosResponse) => {
+        alerta();
+        //history.push('/peliculas');
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={css.div}>
@@ -13,10 +32,25 @@ export default function PeliculaIndividual(props: peliculaIndividualProps) {
       <p>
         <a href={construirLink()}>{props.pelicula.titulo}</a>
       </p>
+      <div>
+        <Link to={`/peliculas/editar/${props.pelicula.id}`} style={{ marginRight: '10px' }} className='btn btn-info'>
+          Editar
+        </Link>
+        <Button
+          className='btn btn-danger'
+          onClick={() =>
+            confirmar(async () => {
+              await borrar();
+            })
+          }
+        >
+          Eliminar
+        </Button>
+      </div>
     </div>
   );
 }
 
 interface peliculaIndividualProps {
-  pelicula: pelicula;
+  pelicula: peliculaDTO;
 }

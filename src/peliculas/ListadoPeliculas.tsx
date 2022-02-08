@@ -1,4 +1,4 @@
-import { pelicula } from './peliculas.model';
+import { peliculaDTO } from './peliculas.model';
 import PeliculaIndividual from './PeliculaIndividual';
 import css from './listadoPeliculas.module.css';
 
@@ -17,5 +17,5 @@ export default function ListadoPeliculas(props: listadoPeliculasProps) {
 }
 
 interface listadoPeliculasProps {
-  peliculas?: pelicula[];
+  peliculas?: peliculaDTO[];
 }
