@@ -7,6 +7,7 @@ import axios, { AxiosResponse } from 'axios';
 import { urlPeliculas } from '../utils/endpoints';
 import confirmar from '../utils/Confirmar';
 import AlertaContext from '../utils/AlertaContext';
+import Autorizado from '../Auth/Autorizado';
 
 export default function PeliculaIndividual(props: peliculaIndividualProps) {
   const history = useHistory();
@@ -32,21 +33,32 @@ export default function PeliculaIndividual(props: peliculaIndividualProps) {
       <p>
         <a href={construirLink()}>{props.pelicula.titulo}</a>
       </p>
-      <div>
-        <Link to={`/peliculas/editar/${props.pelicula.id}`} style={{ marginRight: '10px' }} className='btn btn-info'>
-          Editar
-        </Link>
-        <Button
-          className='btn btn-danger'
-          onClick={() =>
-            confirmar(async () => {
-              await borrar();
-            })
-          }
-        >
-          Eliminar
-        </Button>
-      </div>
+      <Autorizado
+        role='admin'
+        autorizado={
+          <>
+            <div>
+              <Link
+                to={`/peliculas/editar/${props.pelicula.id}`}
+                style={{ marginRight: '10px' }}
+                className='btn btn-info'
+              >
+                Editar
+              </Link>
+              <Button
+                className='btn btn-danger'
+                onClick={() =>
+                  confirmar(async () => {
+                    await borrar();
+                  })
+                }
+              >
+                Eliminar
+              </Button>
+            </div>
+          </>
+        }
+      />
     </div>
   );
 }

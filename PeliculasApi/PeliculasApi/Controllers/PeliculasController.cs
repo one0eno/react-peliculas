@@ -219,20 +219,26 @@ namespace PeliculasApi.Controllers
         {
 
             var peliculasQueryable = context.Peliculas.AsQueryable();
+            //var peliculasQueryableEstrenos = context.Peliculas.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(peliculasFiltrarDTO.Titulo))
-                peliculasQueryable.Where(x => x.Titulo == peliculasFiltrarDTO.Titulo);
+                peliculasQueryable = peliculasQueryable.Where(x => x.Titulo.ToUpper().Contains(peliculasFiltrarDTO.Titulo.ToUpper()) );
             if (peliculasFiltrarDTO.EnCines)
-                peliculasQueryable.Where(x => x.EnCines);
+                peliculasQueryable =  peliculasQueryable.Where(x => x.EnCines);
             if (peliculasFiltrarDTO.ProximosEstrenos)
-                peliculasQueryable.Where(x => x.FechaLanzamiento > DateTime.Now);
+            {
+                peliculasQueryable = peliculasQueryable.Where(x => x.FechaLanzamiento > DateTime.Now);
+                //peliculasQueryableEstrenos = peliculasQueryableEstrenos.Where(x => x.FechaLanzamiento > DateTime.Now);
+            }
+                
             if (peliculasFiltrarDTO.GeneroId != 0)
             {
-                peliculasQueryable
+                peliculasQueryable =  peliculasQueryable
                     .Where(x => x.PeliculasGeneros.Select(a => a.GeneroId)
                     .Contains(peliculasFiltrarDTO.GeneroId));
             }
-                
+
+            //var mergeQueriables = peliculasQueryable.Concat(peliculasQueryableEstrenos);
 
             await HttpContext.InsertarParametrosPaginacionEnCabecera(peliculasQueryable);
             var peliculas = await peliculasQueryable.Paginar(peliculasFiltrarDTO.PaginacionDTO).ToListAsync();

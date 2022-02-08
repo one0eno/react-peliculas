@@ -57,7 +57,14 @@ namespace PeliculasApi.Controllers
 
             //repositorio.ObtenerTodosLosGeneros();
         }
+        [HttpGet("todos")]
+        public async Task<ActionResult<List<GeneroDTO>>> Todos()
+        {
 
+            var generos = await context.Generos.OrderBy(x => x.Nombre).ToListAsync();
+         
+            return mapper.Map<List<GeneroDTO>>(generos);
+        }
         //[HttpGet("{id:int}/{nombre=Jorge}")]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<GeneroDTO>> Get(int id) {

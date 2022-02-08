@@ -4,6 +4,7 @@ import ListadoPeliculas from './peliculas/ListadoPeliculas';
 import { urlPeliculas } from './utils/endpoints';
 import axios, { AxiosResponse } from 'axios';
 import AlertaContext from './utils/AlertaContext';
+import Autorizado from './Auth/Autorizado';
 
 export default function LandingPage() {
   const [peliculas, setPeliculas] = useState<landingPageDTO>();
@@ -26,6 +27,7 @@ export default function LandingPage() {
   }, []);
   return (
     <>
+      <Autorizado autorizado={<>Estas autorizado</>} noAutorizado={<>NO Estas autorizado</>} role='admin' />
       <AlertaContext.Provider value={() => cargarDatos()}>
         <h3>Peliculas en cartelera</h3>
         <ListadoPeliculas peliculas={peliculas?.enCartelera}></ListadoPeliculas>
