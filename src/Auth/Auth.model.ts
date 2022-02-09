@@ -8,7 +8,7 @@ export interface crednecialesUsuario {
   password: string;
 }
 
-export interface respuetaAutenticacion {
+export interface respuestaAutenticacion {
   token: string;
   expiracion: Date;
 }

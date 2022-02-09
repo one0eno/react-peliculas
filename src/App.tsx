@@ -4,8 +4,9 @@ import rutas from './route-config';
 import configurarsValidaciones from './validaciones';
 import './App.css';
 import AutenticacionContext from './Auth/AutenticacionContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { claim } from './Auth/Auth.model';
+import { obetenerClaims } from './Auth/ManejadorJWT';
 configurarsValidaciones();
 
 function App() {
@@ -14,7 +15,12 @@ function App() {
     // { nombre: 'role', valor: 'admin' },
   ]);
 
-  const actualizar = (claims: claim[]) => {};
+  useEffect(() => {
+    setClaims(obetenerClaims());
+  }, []);
+  const actualizar = (claims: claim[]) => {
+    setClaims(claims);
+  };
 
   function esAdmin() {
     return claims.findIndex((claim) => claim.nombre === 'role' && claim.valor === 'admin') > -1;
