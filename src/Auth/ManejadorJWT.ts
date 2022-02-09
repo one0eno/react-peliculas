@@ -38,3 +38,8 @@ export function LogoOut() {
   localStorage.removeItem(llaveToken);
   localStorage.removeItem(llaveExpiracion);
 }
+
+export function obternerToken() {
+  const token = localStorage.getItem(llaveToken);
+  return token;
+}

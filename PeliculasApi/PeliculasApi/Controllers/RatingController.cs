@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace PeliculasApi.Controllers
 {
 
-    [Route("api/peliculas")]
+    [Route("api/rating")]
     [ApiController]
     public class RatingController:ControllerBase
     {
@@ -44,7 +44,7 @@ namespace PeliculasApi.Controllers
         {
            var email = HttpContext.User.Claims.FirstOrDefault(o => o.Type == "email").Value;
            var usuario = await userManager.FindByEmailAsync(email);
-           var usuarioId = Convert.ToInt32(usuario.Id) ;
+           var usuarioId = usuario.Id ;
 
            var ratingActual = await context.Ratings.FirstOrDefaultAsync(x => x.UsuarioId == usuarioId && x.PeliculaId == ratingDTO.PeliculaId);
 
@@ -54,7 +54,7 @@ namespace PeliculasApi.Controllers
                 var rating = new Rating();
                 rating.PeliculaId = ratingDTO.PeliculaId;
                 rating.Puntuacion = ratingDTO.Puntuacion;
-                rating.UsuarioId  = Convert.ToInt32(usuarioId) ;
+                rating.UsuarioId  = usuarioId ;
 
                 context.Add(rating);   
             }

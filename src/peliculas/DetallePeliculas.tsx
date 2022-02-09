@@ -1,13 +1,16 @@
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { urlPeliculas } from '../utils/endpoints';
+import { urlPeliculas, urlRating } from '../utils/endpoints';
 import { peliculaDTO } from './peliculas.model';
 import { Cargando } from '../utils/cargando';
 import { imageOverlay } from 'leaflet';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import Mapa from '../utils/Mapa';
 import { coordenadasDTO } from '../utils/coordenadasDTO';
+import Rating from '../utils/Ratin';
+import Swal from 'sweetalert2';
+import { title } from 'process';
 export default function DetallePeliculas() {
   const { id }: any = useParams();
 
@@ -56,6 +59,16 @@ export default function DetallePeliculas() {
     }
     return [];
   };
+
+  const onVote = async (voto: number) => {
+    try {
+      await axios.post(`${urlRating}`, { puntuacion: voto, peliculaId: id });
+      Swal.fire({ title: 'Voto', text: 'Gracias por votar', icon: 'success' });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <h3>Detalle Peliculas</h3>
@@ -63,7 +76,7 @@ export default function DetallePeliculas() {
         <div style={{ display: 'flex' }}>
           <div>
             <h2>
-              {pelicula.titulo} {pelicula.fechaLanzamiento?.getFullYear()}{' '}
+              {pelicula.titulo} {pelicula.fechaLanzamiento?.getFullYear()}
             </h2>
             {pelicula.generos?.map((genero) => {
               return (
@@ -76,8 +89,9 @@ export default function DetallePeliculas() {
                   {genero.nombre}
                 </Link>
               );
-            })}
-            |{pelicula.fechaLanzamiento?.toDateString()}
+            })}{' '}
+            {pelicula.fechaLanzamiento?.toDateString()} - Voto promedio:{pelicula.promedioVoto} - Tu voto:{' '}
+            <Rating maximoValor={5} valorSeleccionado={pelicula.votoUsuario!} onChange={onVote} />
             <div style={{ display: 'flex', marginTop: '1rem' }}>
               <span style={{ display: 'inline-block', marginRight: '1rem' }}>
                 <img src={pelicula.poster} alt='Poster' style={{ width: '225px', height: '315px' }} />

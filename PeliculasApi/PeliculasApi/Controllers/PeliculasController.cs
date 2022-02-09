@@ -116,7 +116,7 @@ namespace PeliculasApi.Controllers
                 {
                     var email = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "email").Value;
 
-                    var usuario = userManager.FindByEmailAsync(email);
+                    var usuario = await userManager.FindByEmailAsync(email);
                     var usuarioId = usuario.Id;
 
                     var ratingDB = await context.Ratings

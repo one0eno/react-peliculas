@@ -4,7 +4,6 @@ import ListadoPeliculas from './peliculas/ListadoPeliculas';
 import { urlPeliculas } from './utils/endpoints';
 import axios, { AxiosResponse } from 'axios';
 import AlertaContext from './utils/AlertaContext';
-import Autorizado from './Auth/Autorizado';
 
 export default function LandingPage() {
   const [peliculas, setPeliculas] = useState<landingPageDTO>();

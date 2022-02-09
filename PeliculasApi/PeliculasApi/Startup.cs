@@ -144,7 +144,7 @@ namespace PeliculasApi
             }
 
 
-            //app.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
 
