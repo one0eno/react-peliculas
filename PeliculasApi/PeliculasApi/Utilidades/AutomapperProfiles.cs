@@ -38,6 +38,7 @@ namespace PeliculasApi.Utilidades
                 .ForMember(x => x.Actores, options => options.MapFrom(MapearActoresDTO))
                 .ForMember(X => X.Cines , options => options.MapFrom(Mapearcinesdto));
 
+            CreateMap<RatingDTO, Rating>();
            
 
 

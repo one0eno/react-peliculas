@@ -12,6 +12,7 @@ export default function DetallePeliculas() {
   const { id }: any = useParams();
 
   const [pelicula, setPelicula] = useState<peliculaDTO>();
+  const [rating, setRating] = useState<number>(0);
 
   useEffect(() => {
     try {

@@ -44,7 +44,7 @@ namespace PeliculasApi.Controllers
         {
            var email = HttpContext.User.Claims.FirstOrDefault(o => o.Type == "email").Value;
            var usuario = await userManager.FindByEmailAsync(email);
-           var usuarioId = usuario.Id;
+           var usuarioId = Convert.ToInt32(usuario.Id) ;
 
            var ratingActual = await context.Ratings.FirstOrDefaultAsync(x => x.UsuarioId == usuarioId && x.PeliculaId == ratingDTO.PeliculaId);
 
@@ -54,7 +54,7 @@ namespace PeliculasApi.Controllers
                 var rating = new Rating();
                 rating.PeliculaId = ratingDTO.PeliculaId;
                 rating.Puntuacion = ratingDTO.Puntuacion;
-                rating.UsuarioId  = usuarioId;
+                rating.UsuarioId  = Convert.ToInt32(usuarioId) ;
 
                 context.Add(rating);   
             }

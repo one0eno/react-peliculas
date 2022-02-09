@@ -16,7 +16,7 @@ namespace PeliculasApi.Entidades
         public int PeliculaId { get; set; }
         public Pelicula Pelicula { get; set; }
 
-        public string UsuarioId { get; set; }
+        public int UsuarioId { get; set; }
 
         public IdentityUser Usuario { get; set; }
 

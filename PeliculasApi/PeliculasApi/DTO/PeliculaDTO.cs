@@ -23,6 +23,10 @@ namespace PeliculasApi.DTO
 
         public string Poster { get; set; }
 
+        public int VotoUsuario { get; set; }
+
+        public double PromedioVoto { get; set; }
+
         //Propiedades de navegacion
         public List<PeliculaActorDTO> Actores{ get; set; }
         public List<GeneroDTO> Generos{ get; set; }
