@@ -14,6 +14,7 @@ import FiltroPeliculas from './peliculas/FiltroPeliculas';
 import Editarcines from './cines/editarcines';
 import RedirectLanding from './utils/RedirectLanding';
 import DetallePeliculas from './peliculas/DetallePeliculas';
+import Registro from './Auth/Registro';
 
 const rutas = [
   { path: '/generos/crear', componente: CrearGenero, esAdmin: true },
@@ -32,6 +33,8 @@ const rutas = [
   { path: '/peliculas/crear', componente: CrearPeliculas, esAdmin: true },
   { path: '/peliculas/editar/:id(\\d+)', componente: EditarPeliculas, esAdmin: true },
   { path: '/peliculas/filtrar', componente: FiltroPeliculas },
+
+  { path: '/registro', componente: Registro },
 
   { path: '/', componente: LandingPage, exact: true },
 
