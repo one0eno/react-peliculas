@@ -10,7 +10,7 @@ configurarsValidaciones();
 
 function App() {
   const [claims, setClaims] = useState<claim[]>([
-    { nombre: 'email', valor: 'jorge@hotmail.com' },
+    //{ nombre: 'email', valor: 'jorge@hotmail.com' },
     // { nombre: 'role', valor: 'admin' },
   ]);
 
