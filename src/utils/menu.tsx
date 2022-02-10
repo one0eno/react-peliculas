@@ -29,6 +29,12 @@ export default function Menu() {
               </NavLink>
             </li>
 
+            <li className='nav-item'>
+              <NavLink className='nav-link' activeClassName='claseActiva' to='/peliculas/reserva'>
+                Entradas
+              </NavLink>
+            </li>
+
             <Autorizado
               role='admin'
               autorizado={
@@ -51,6 +57,11 @@ export default function Menu() {
                   <li className='nav-item'>
                     <NavLink className='nav-link' activeClassName='claseActiva' to='/peliculas/crear'>
                       Crear Pelicula
+                    </NavLink>
+                  </li>
+                  <li className='nav-item'>
+                    <NavLink className='nav-link' activeClassName='claseActiva' to='/usuarios'>
+                      Usuarios
                     </NavLink>
                   </li>
                 </>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using NetTopologySuite.Geometries;
+using Microsoft.AspNetCore.Identity;
 
 namespace PeliculasApi.Utilidades
 {
@@ -39,6 +40,8 @@ namespace PeliculasApi.Utilidades
                 .ForMember(X => X.Cines , options => options.MapFrom(Mapearcinesdto));
 
             CreateMap<RatingDTO, Rating>();
+
+            CreateMap<IdentityUser, UsuarioDTO>();
            
 
 

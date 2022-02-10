@@ -17,7 +17,7 @@ namespace PeliculasApi.Controllers
 {
     [Route("api/peliculas")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
     public class PeliculasController : ControllerBase
     {
 
@@ -30,7 +30,7 @@ namespace PeliculasApi.Controllers
         private readonly UserManager<IdentityUser> userManager;
         public PeliculasController(ILogger<PeliculasController> logger,
             ApplicationDBContext context,
-            IMapper mapper, 
+            IMapper mapper,
             IAlmacenadorArchivos almacenadorArchivos,
             UserManager<IdentityUser> userManager)
         {
@@ -89,7 +89,27 @@ namespace PeliculasApi.Controllers
         }
 
 
-        [HttpGet("{id:int}")]
+
+        [HttpGet("GetPeliculaByCineId/{id:int}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<PeliculaDTO>>> GetPeliculaByCineId(int id)
+        {
+            
+            var peliculasQueryable = context.Peliculas
+                .Where(x => x.EnCines == true && x.PeliculasCines.Select(a => a.CineId).Contains(id)).AsQueryable();
+
+            //peliculasQueryable = peliculasQueryable
+            //    .Where(x => x.PeliculasCines.Select(a => a.CineId)
+            //    .Contains(cineId));
+
+            var peliculas = await peliculasQueryable.ToListAsync();
+
+            return mapper.Map<List<PeliculaDTO>>(peliculas);
+
+        }
+
+      
+    [HttpGet("{id:int}")]
         [AllowAnonymous]
         public async Task<ActionResult<PeliculaDTO>> Get(int id)
         {
@@ -136,6 +156,10 @@ namespace PeliculasApi.Controllers
             peliculaDto.Actores = peliculaDto.Actores.OrderBy(x => x.Orden).ToList();
             return peliculaDto;
         }
+
+
+            
+
 
         [HttpGet()]
         [AllowAnonymous]

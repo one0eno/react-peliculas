@@ -58,32 +58,40 @@ export default function IndiceEntidad<T>(props: indiceEntidadProps<T>) {
   return (
     <>
       <div>{props.titulo}</div>
-      <Link className='btn btn-primary' to={`${props.urlCrear}`}>
-        Crear {props.nombreEntidad}
-      </Link>
 
-      <div className='form-group'>
-        <select
-          defaultValue={10}
-          className='form-control'
-          title='Registros por pagina'
-          onChange={(e) => {
-            setPagina(1);
-            setRecordsPorPagina(parseInt(e.currentTarget.value, 10));
-          }}
-        >
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={25}>25</option>
-          <option value={50}>50</option>
-        </select>
+      {props.urlCrear ? (
+        <Link className='btn btn-primary' to={`${props.urlCrear}`}>
+          Crear {props.nombreEntidad}
+        </Link>
+      ) : null}
+
+      <div className='row'>
+        <div className='col-1'>
+          <div className='form-group'>
+            <select
+              defaultValue={10}
+              className='form-control'
+              title='Registros por pagina'
+              onChange={(e) => {
+                setPagina(1);
+                setRecordsPorPagina(parseInt(e.currentTarget.value, 10));
+              }}
+            >
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={25}>25</option>
+              <option value={50}>50</option>
+            </select>
+          </div>
+        </div>
+        <div className='col-10'>
+          <Paginacion
+            cantidadTotalDePaginas={totalDePaginas}
+            paginaActual={pagina}
+            onChange={(nuevaPagina) => setPagina(nuevaPagina)}
+          />
+        </div>
       </div>
-
-      <Paginacion
-        cantidadTotalDePaginas={totalDePaginas}
-        paginaActual={pagina}
-        onChange={(nuevaPagina) => setPagina(nuevaPagina)}
-      />
 
       <ListadoGenerico listado={entidades}>
         <table className='table table-striped'>{props.children(entidades!, botones)}</table>
@@ -96,7 +104,7 @@ interface indiceEntidadProps<T> {
   urlBase: string;
   titulo: string;
 
-  urlCrear: string;
-  nombreEntidad: string;
+  urlCrear?: string;
+  nombreEntidad?: string;
   children(entidades: T[], botones: (urlEditar: string, id: number) => ReactElement): ReactElement;
 }

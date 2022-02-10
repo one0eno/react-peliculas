@@ -81,7 +81,13 @@ namespace PeliculasApi
 
                     
 
-                }); 
+                });
+            //autorithation, despues de configurar EsAdmin, puedo utilizar la politica en aquells endpoints 
+            //que quiera proteger para lo roles admin
+            services.AddAuthorization(opciones =>
+            {
+                opciones.AddPolicy("EsAdmin", policy => policy.RequireClaim("role", "admin"));
+            });
             // services.AddResponseCaching();
 
             services.AddDbContext<ApplicationDBContext>(options =>
@@ -128,8 +134,9 @@ namespace PeliculasApi
             });
            
             services.AddTransient<MiFiltroDeAccion>();
-           
-           // services.AddScoped<IRepositorio, RepositoryEnMemoria>();
+            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+
+            // services.AddScoped<IRepositorio, RepositoryEnMemoria>();
 
         }
 

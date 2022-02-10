@@ -16,6 +16,8 @@ import RedirectLanding from './utils/RedirectLanding';
 import DetallePeliculas from './peliculas/DetallePeliculas';
 import Registro from './Auth/Registro';
 import Login from './Auth/Login';
+import IndiceUsuarios from './Auth/IndiceUsuarios';
+import IndiceCinesReserva from './cines/IndiceCinesReserva';
 
 const rutas = [
   { path: '/generos/crear', componente: CrearGenero, esAdmin: true },
@@ -34,6 +36,10 @@ const rutas = [
   { path: '/peliculas/crear', componente: CrearPeliculas, esAdmin: true },
   { path: '/peliculas/editar/:id(\\d+)', componente: EditarPeliculas, esAdmin: true },
   { path: '/peliculas/filtrar', componente: FiltroPeliculas },
+
+  { path: '/peliculas/reserva', componente: IndiceCinesReserva },
+
+  { path: '/usuarios', componente: IndiceUsuarios, exact: true, esAdmin: true },
 
   { path: '/registro', componente: Registro },
   { path: '/login', componente: Login },

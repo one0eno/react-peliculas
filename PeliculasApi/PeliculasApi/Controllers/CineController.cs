@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,6 +16,7 @@ namespace PeliculasApi.Controllers
 {
     [Route("api/cines")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
     public class CineController:ControllerBase
     {
         private readonly ILogger logger;
@@ -33,6 +36,19 @@ namespace PeliculasApi.Controllers
         ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         //[ServiceFilter(typeof(MiFiltroDeAccion))]
         public async Task<ActionResult<List<CineDTO>>> Get([FromQuery] PaginacionDTO paginacionDTO)
+        {
+
+            var queryable = context.Cines.AsQueryable();
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+            var cines = await queryable.OrderBy(x => x.Nombre).Paginar(paginacionDTO).ToListAsync();
+            return mapper.Map<List<CineDTO>>(cines);
+
+
+        }
+
+        [HttpGet("CinesReserva")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<CineDTO>>> CinesReserva([FromQuery] PaginacionDTO paginacionDTO)
         {
 
             var queryable = context.Cines.AsQueryable();

@@ -19,6 +19,7 @@ namespace PeliculasApi.Controllers
 {
     [Route("api/generos")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
     public class GenerosController : ControllerBase
     {
 
@@ -58,6 +59,7 @@ namespace PeliculasApi.Controllers
             //repositorio.ObtenerTodosLosGeneros();
         }
         [HttpGet("todos")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<GeneroDTO>>> Todos()
         {
 
